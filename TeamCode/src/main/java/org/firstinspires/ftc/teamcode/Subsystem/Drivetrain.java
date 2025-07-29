@@ -1,0 +1,65 @@
+package org.firstinspires.ftc.teamcode.Subsystem;
+
+import com.pedropathing.follower.Follower;
+import com.pedropathing.follower.FollowerConstants;
+import com.pedropathing.localization.Pose;
+import com.pedropathing.util.Constants;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.seattlesolvers.solverslib.command.SubsystemBase;
+import com.seattlesolvers.solverslib.solversHardware.SolversMotor;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.pedroPathing.constants.FConstants;
+import org.firstinspires.ftc.teamcode.pedroPathing.constants.LConstants;
+
+public class Drivetrain extends SubsystemBase {
+
+    private SolversMotor leftFront;
+    private SolversMotor leftRear;
+    private SolversMotor rightFront;
+    private SolversMotor rightRear;
+
+    public Follower follower;
+    public Pose startPose;
+
+    public Drivetrain (HardwareMap hardwareMap){
+        leftFront = new SolversMotor(hardwareMap.get(DcMotor.class, FollowerConstants.leftRearMotorName),0.01);
+        rightFront = new SolversMotor(hardwareMap.get(DcMotor.class,FollowerConstants.rightFrontMotorName), 0.01);
+        leftRear = new SolversMotor(hardwareMap.get(DcMotor.class, FollowerConstants.leftRearMotorName), 0.01);
+        rightRear = new SolversMotor(hardwareMap.get(DcMotor.class, FollowerConstants.rightRearMotorName),0.01);
+
+        leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightFront.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftRear.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        startPose = new Pose(0,0,0);
+        follower = new Follower(hardwareMap);
+        Constants.setConstants(FConstants.class, LConstants.class);
+    }
+    public void setMovementVectors(double forwardDrive, double laterDrive, double heading){
+        setMovementVectors(forwardDrive,forwardDrive,heading);
+    }
+    public void startTeleop(){
+        follower.startTeleopDrive();
+        follower.update();
+    }
+    public void periodic(Telemetry telemetry){
+        telemetry.addData("X Position ",follower.getPose().getY());
+        telemetry.addData("Y Position ", follower.getPose().getY());
+        telemetry.addData("Heading ", follower.getPose().getHeading());
+
+    }
+}
