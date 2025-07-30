@@ -11,7 +11,8 @@ public class DrivetrainController  extends CommandBase {
     private DoubleSupplier forward;
     private DoubleSupplier lateral;
     private DoubleSupplier heading;
-    public DrivetrainController(Drivetrain drivetrain, DoubleSupplier forward, DoubleSupplier lateral, DoubleSupplier heading){
+    public DrivetrainController(Drivetrain drivetrain, DoubleSupplier forward, DoubleSupplier lateral, DoubleSupplier heading) {
+
         this.drivetrain = drivetrain;
         this.forward = forward;
         this.lateral = lateral;
@@ -19,11 +20,13 @@ public class DrivetrainController  extends CommandBase {
 
         addRequirements(drivetrain);
     }
+    @Override
     public void initialize(){
         drivetrain.startTeleop();
     }
+
+    @Override
     public void execute (){
         drivetrain.setMovementVectors(forward.getAsDouble(), lateral.getAsDouble(), heading.getAsDouble());
-        drivetrain.follower.update();
     }
 }

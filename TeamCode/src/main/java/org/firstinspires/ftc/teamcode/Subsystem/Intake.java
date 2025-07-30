@@ -25,7 +25,9 @@ public class Intake extends SubsystemBase {
     public  boolean clawOpen;
     public IntakeStates intakeStates;
 
-    public Intake (HardwareMap hardwareMap){
+    private Telemetry telemetry;
+
+    public Intake (HardwareMap hardwareMap, Telemetry telemetry){
         linkage = new SolversServo(hardwareMap.get(Servo.class, "linkageServo"),0.01);
         linkage2 = new SolversServo(hardwareMap.get(Servo.class, "linkageServo2"),0.01);
         intakeArmleft = new SolversServo(hardwareMap.get(Servo.class, "leftPivotingServo"),0.01);
@@ -39,6 +41,10 @@ public class Intake extends SubsystemBase {
         intakeArmRight.setDirection(Servo.Direction.REVERSE);
         intakeWrist.setDirection(Servo.Direction.REVERSE);
         intakeClaw.setDirection(Servo.Direction.REVERSE);
+
+        setIntakeState(IntakeStates.INTAKEOUT);
+
+        this.telemetry = telemetry;
     }
 
     public IntakeStates getIntakeStates() {
@@ -71,7 +77,7 @@ public class Intake extends SubsystemBase {
                 intakeArmRight.setPosition(IntakeConstants.hover);
                 intakeWrist.setPosition(IntakeConstants.deg180);
                 setClawOpen(true);
-            break;
+                break;
             case INTAKEIN:
                 linkage.setPosition(IntakeConstants.linkageIn);
                 linkage2.setPosition(IntakeConstants.linkageIn);
@@ -79,15 +85,15 @@ public class Intake extends SubsystemBase {
                 intakeArmRight.setPosition(IntakeConstants.pickUp);
                 intakeWrist.setPosition(IntakeConstants.deg180);
                 setClawOpen(true);
-            break;
+                break;
             case TRANSFER:
                 linkage.setPosition(IntakeConstants.linkageIn);
                 linkage2.setPosition(IntakeConstants.linkageIn);
                 intakeArmleft.setPosition(IntakeConstants.intakeArmtransfer);
                 intakeArmRight.setPosition(IntakeConstants.intakeArmtransfer);
-                intakeWrist.setPosition(IntakeConstants.deg180);
+                intakeWrist.setPosition(IntakeConstants.deg90);
                 setClawOpen(true);
-            break;
+                break;
             case HOVEROUT:
                 linkage.setPosition(IntakeConstants.linkageOut);
                 linkage2.setPosition(IntakeConstants.linkageOut);
@@ -95,18 +101,20 @@ public class Intake extends SubsystemBase {
                 intakeArmRight.setPosition(IntakeConstants.hover);
                 intakeWrist.setPosition(IntakeConstants.deg180);
                 setClawOpen(true);
-            break;
+                break;
             case INTAKEOUT:
                 linkage.setPosition(IntakeConstants.linkageOut);
                 linkage2.setPosition(IntakeConstants.linkageOut);
                 intakeArmleft.setPosition(IntakeConstants.pickUp);
                 intakeArmRight.setPosition(IntakeConstants.pickUp);
-                intakeWrist.setPosition(IntakeConstants.deg180);
+                intakeWrist.setPosition(IntakeConstants.deg90);
                 setClawOpen(true);
+                break;
         }
     }
 
-    public void periodic (Telemetry telemetry){
+    @Override
+    public void periodic (){
         telemetry.addData("Intake State ", getIntakeStates());
         telemetry.addData("claw ", isClawOpen());
 

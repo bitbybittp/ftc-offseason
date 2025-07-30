@@ -27,21 +27,25 @@ public class Elevator extends SubsystemBase {
     public boolean isReached;
     public PIDFController elevatorController = new PIDFController(ElevatorConstants.p,ElevatorConstants.i,ElevatorConstants.d, ElevatorConstants.f);
 
-    public Elevator (HardwareMap hardwareMap){
+    private Telemetry telemetry;
+
+    public Elevator (HardwareMap hardwareMap, Telemetry telemetry){
         liftMotor = new SolversMotor(hardwareMap.get(DcMotor.class,"viperMotor"),0.01);
         liftEncoder = new Motor(hardwareMap,"viperMotor").encoder;
 
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         liftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         liftEncoder.reset();
-        elevatorController.setTolerance(0.25);
+        elevatorController.setTolerance(25);
+
+        this.telemetry = telemetry;
     }
     public ElevatorStates getElevatorStates(){ return elevatorStates;}
 
     public double getElevatorPosition(){ return getElevatorPosition();}
 
     public boolean elevatorFinished(){
-        isReached = getElevatorPosition()==0 && liftEncoder.getCorrectedVelocity()==0;
+        isReached = elevatorController.atSetPoint() && liftEncoder.getCorrectedVelocity()==0;
         return isReached;
     }
 
@@ -49,35 +53,40 @@ public class Elevator extends SubsystemBase {
         switch (elevatorStates){
             case TRANSFER:
                 target = ElevatorConstants.transferHeight;
-            break;
+                break;
             case SAMPLESCORELOW:
                 target = ElevatorConstants.sampleScoreLow;
-            break;
+                break;
             case CLEARENCE:
                 target = ElevatorConstants.clearanceHeight;
-            break;
+                break;
             case SPECIMENSCORE:
                 target = ElevatorConstants.specimenScore;
-            break;
+                break;
             case SAMPLESCOREHIGH:
                 target = ElevatorConstants.sampleScoreHigh;
+                break;
         }
+
+        isReached = false;
     }
 
     public void toPosition(){
+        elevatorController.setSetPoint(this.target);
          power = elevatorController.calculate(getElevatorPosition(), target);
 
-        if (target==0){
+        if (target <= 0){
             liftMotor.setPower(0);
         } else {
             liftMotor.setPower(power);
         }
     }
 
-    public void periodic(Telemetry telemetry){
+    @Override
+    public void periodic(){
         telemetry.addData("Elevator Position ", getElevatorPosition());
-        telemetry.addData("Current Elevator State ", getElevatorStates());
-        telemetry.addData("Power Value ",power);
+        telemetry.addData("Current Elevator State ", getElevatorStates().toString());
+        telemetry.addData("Power Value ", power);
         telemetry.addData("Target Position ", target);
 
     }

@@ -13,6 +13,7 @@ import com.seattlesolvers.solverslib.solversHardware.SolversMotor;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.pedroPathing.constants.FConstants;
 import org.firstinspires.ftc.teamcode.pedroPathing.constants.LConstants;
+import org.firstinspires.ftc.teamcode.utilities.DrivetrainConstants;
 
 public class Drivetrain extends SubsystemBase {
 
@@ -24,11 +25,13 @@ public class Drivetrain extends SubsystemBase {
     public Follower follower;
     public Pose startPose;
 
-    public Drivetrain (HardwareMap hardwareMap){
-        leftFront = new SolversMotor(hardwareMap.get(DcMotor.class, FollowerConstants.leftRearMotorName),0.01);
-        rightFront = new SolversMotor(hardwareMap.get(DcMotor.class,FollowerConstants.rightFrontMotorName), 0.01);
-        leftRear = new SolversMotor(hardwareMap.get(DcMotor.class, FollowerConstants.leftRearMotorName), 0.01);
-        rightRear = new SolversMotor(hardwareMap.get(DcMotor.class, FollowerConstants.rightRearMotorName),0.01);
+    private Telemetry telemetry;
+
+    public Drivetrain (HardwareMap hardwareMap, Telemetry telemetry){
+        leftFront = new SolversMotor(hardwareMap.get(DcMotor.class, DrivetrainConstants.leftFrontMotorName),0.01);
+        rightFront = new SolversMotor(hardwareMap.get(DcMotor.class,DrivetrainConstants.rightFrontMotorName), 0.01);
+        leftRear = new SolversMotor(hardwareMap.get(DcMotor.class, DrivetrainConstants.leftRearMotorName), 0.01);
+        rightRear = new SolversMotor(hardwareMap.get(DcMotor.class, DrivetrainConstants.rightRearMotorName),0.01);
 
         leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
         rightFront.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -46,20 +49,28 @@ public class Drivetrain extends SubsystemBase {
         rightRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         startPose = new Pose(0,0,0);
-        follower = new Follower(hardwareMap);
-        Constants.setConstants(FConstants.class, LConstants.class);
+        follower = new Follower(hardwareMap, FConstants.class, LConstants.class);
+
+        this.telemetry = telemetry;
     }
-    public void setMovementVectors(double forwardDrive, double laterDrive, double heading){
-        setMovementVectors(forwardDrive,forwardDrive,heading);
+    public void setMovementVectors(double forwardDrive, double lateralDrive, double heading){
+        follower.setTeleOpMovementVectors(forwardDrive, lateralDrive, heading, true);
     }
+    public void setVectors(double forwardDrive, double lateralDrive, double heading){
+        follower.setTeleOpMovementVectors(forwardDrive, lateralDrive, heading, true);
+    }
+
     public void startTeleop(){
         follower.startTeleopDrive();
         follower.update();
     }
-    public void periodic(Telemetry telemetry){
-        telemetry.addData("X Position ",follower.getPose().getY());
+
+    @Override
+    public void periodic(){
+        telemetry.addData("X Position ",follower.getPose().getX());
         telemetry.addData("Y Position ", follower.getPose().getY());
         telemetry.addData("Heading ", follower.getPose().getHeading());
+        follower.update();
 
     }
 }

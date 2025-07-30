@@ -16,7 +16,7 @@ public class IntakeController extends CommandBase {
         this.clawOpen = intake.clawOpen;
         addRequirements(intake);
     }
-
+    @Override
     public void initialize(){
         intake.setIntakeState(intakeStates);
         intake.setClawOpen(clawOpen);

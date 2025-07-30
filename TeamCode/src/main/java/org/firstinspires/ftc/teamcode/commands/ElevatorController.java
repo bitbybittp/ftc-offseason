@@ -14,13 +14,16 @@ public class ElevatorController extends CommandBase {
         this.elevatorStates = elevatorStates;
         addRequirements(elevator);
     }
+
+    @Override
     public void initialize(){elevator.setElevatorTargetPositon(elevatorStates);}
 
+    @Override
     public void execute(){
         elevator.toPosition();
     }
 
-    //public boolean isFinished(){
-        //return elevator.elevatorFinished();
-   // }
+    public boolean isFinished(){
+        return elevator.elevatorFinished();
+   }
 }

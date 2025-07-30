@@ -17,6 +17,7 @@ public class OuttakeController extends CommandBase {
         addRequirements(outtake);
 
     }
+    @Override
     public void initialize(){
         outtake.setOuttakeStates(outtakeStates);
         outtake.setClawOpen(clawOpen);
