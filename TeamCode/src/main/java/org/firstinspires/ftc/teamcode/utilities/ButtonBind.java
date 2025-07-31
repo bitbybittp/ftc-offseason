@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.utilities;
 
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Subsystem.Elevator;
 import org.firstinspires.ftc.teamcode.Subsystem.Intake;
 import org.firstinspires.ftc.teamcode.Subsystem.Outtake;
@@ -13,8 +15,7 @@ import org.firstinspires.ftc.teamcode.commands.group.SpecimenScoreAndRetract;
 
 public class ButtonBind{
     private ButtonMap buttonMap;
-
-    public ButtonBind(GamepadEx g1, Intake intake, Elevator elevator, Outtake outtake){
+    public ButtonBind(GamepadEx g1, HardwareMap hardwareMap,Intake intake, Outtake outtake, Elevator elevator){
         buttonMap = new ButtonMap(g1);
         buttonMap.pickSample.whenPressed(new PickUpSample(intake, elevator));
         buttonMap.retractAndTransfer.whenPressed(new RetractAndTransfer(intake, elevator, outtake));

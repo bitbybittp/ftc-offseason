@@ -19,7 +19,7 @@ public class OuttakeController extends CommandBase {
     }
     @Override
     public void initialize(){
-        outtake.setOuttakeStates(outtakeStates);
+        outtake.setOuttakeState(outtakeStates);
         outtake.setClawOpen(clawOpen);
     }
 

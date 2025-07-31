@@ -24,19 +24,18 @@ public class RobotController extends CommandOpMode {
     private Outtake outtake;
     private Elevator elevator;
     private GamepadEx g1;
-    private Button pickSample;
+    private ButtonBind buttonBind;
 
     long lastTime = 0;
 
     @Override
     public void initialize() {
+        g1 = new GamepadEx(gamepad1);
         drivetrain = new Drivetrain(hardwareMap, telemetry);
         intake = new Intake(hardwareMap, telemetry);
         outtake = new Outtake(hardwareMap, telemetry);
         elevator = new Elevator(hardwareMap, telemetry);
-        g1 = new GamepadEx(gamepad1);
-        pickSample = new GamepadButton(g1, GamepadKeys.Button.A);
-        pickSample.whenPressed(new CheckRobot(elevator));
+        buttonBind = new ButtonBind(g1,hardwareMap,intake, outtake, elevator);
         drivetrain.setDefaultCommand(new DrivetrainController(
                 drivetrain,
                 g1::getLeftY,
@@ -44,7 +43,7 @@ public class RobotController extends CommandOpMode {
                 g1::getRightX
         ));
 
-        register(drivetrain);
+        register(drivetrain,intake,outtake,elevator);
     }
 
     public void run() {

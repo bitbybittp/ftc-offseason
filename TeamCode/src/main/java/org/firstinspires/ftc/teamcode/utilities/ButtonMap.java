@@ -6,11 +6,11 @@ import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
 public class ButtonMap {
-    public Button scoreSample;
-    public Button scoreSpecimen;
-    public Button pickSample;
-    public Button prepareIntake;
-    public Button retractAndTransfer;
+    public GamepadButton scoreSample;
+    public GamepadButton scoreSpecimen;
+    public GamepadButton pickSample;
+    public GamepadButton prepareIntake;
+    public GamepadButton retractAndTransfer;
 
     public ButtonMap(GamepadEx g1){
         scoreSample = new GamepadButton(g1, GamepadKeys.Button.LEFT_BUMPER);

@@ -7,6 +7,7 @@ import com.pedropathing.util.Constants;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IMU;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.solversHardware.SolversMotor;
 
@@ -24,6 +25,7 @@ public class Drivetrain extends SubsystemBase {
 
     public Follower follower;
     public Pose startPose;
+    private IMU imu;
 
     private Telemetry telemetry;
 
@@ -56,10 +58,6 @@ public class Drivetrain extends SubsystemBase {
     public void setMovementVectors(double forwardDrive, double lateralDrive, double heading){
         follower.setTeleOpMovementVectors(forwardDrive, lateralDrive, heading, true);
     }
-    public void setVectors(double forwardDrive, double lateralDrive, double heading){
-        follower.setTeleOpMovementVectors(forwardDrive, lateralDrive, heading, true);
-    }
-
     public void startTeleop(){
         follower.startTeleopDrive();
         follower.update();
@@ -67,10 +65,10 @@ public class Drivetrain extends SubsystemBase {
 
     @Override
     public void periodic(){
-        telemetry.addData("X Position ",follower.getPose().getX());
+        telemetry.addData("X Position ", follower.getPose().getX());
         telemetry.addData("Y Position ", follower.getPose().getY());
         telemetry.addData("Heading ", follower.getPose().getHeading());
-        follower.update();
+        //follower.update();
 
     }
 }

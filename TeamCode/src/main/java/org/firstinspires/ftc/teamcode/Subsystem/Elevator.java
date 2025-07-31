@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Subsystem;
 
+import com.bylazar.ftcontrol.panels.Panels;
+import com.bylazar.ftcontrol.panels.integration.TelemetryManager;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -25,6 +27,7 @@ public class Elevator extends SubsystemBase {
     public double target;
     public double power;
     public boolean isReached;
+    private TelemetryManager telemetryManager;
     public PIDFController elevatorController = new PIDFController(ElevatorConstants.p,ElevatorConstants.i,ElevatorConstants.d, ElevatorConstants.f);
 
     private Telemetry telemetry;
@@ -37,12 +40,15 @@ public class Elevator extends SubsystemBase {
         liftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         liftEncoder.reset();
         elevatorController.setTolerance(25);
+        elevatorStates = ElevatorStates.TRANSFER;
+        target=0;
 
+        telemetryManager = Panels.getTelemetry();
         this.telemetry = telemetry;
     }
     public ElevatorStates getElevatorStates(){ return elevatorStates;}
 
-    public double getElevatorPosition(){ return getElevatorPosition();}
+    public double getElevatorPosition(){ return liftEncoder.getPosition();}
 
     public boolean elevatorFinished(){
         isReached = elevatorController.atSetPoint() && liftEncoder.getCorrectedVelocity()==0;
@@ -86,8 +92,12 @@ public class Elevator extends SubsystemBase {
     public void periodic(){
         telemetry.addData("Elevator Position ", getElevatorPosition());
         telemetry.addData("Current Elevator State ", getElevatorStates().toString());
-        telemetry.addData("Power Value ", power);
+        telemetry.addData("Power Value ", liftMotor.getPower());
         telemetry.addData("Target Position ", target);
+
+        telemetryManager.graph("Target",target);
+        telemetryManager.graph("Elevator Position", getElevatorPosition());
+        telemetryManager.update(telemetry);
 
     }
 

@@ -35,14 +35,16 @@ public class Intake extends SubsystemBase {
         intakeWrist = new SolversServo(hardwareMap.get(Servo.class, "intakeArm"),0.01);
         intakeClaw = new SolversServo(hardwareMap.get(Servo.class, "intakeClaw"),0.01);
 
-        linkage.setDirection(Servo.Direction.REVERSE);
+        linkage.setDirection(Servo.Direction.FORWARD);
         linkage2.setDirection(Servo.Direction.REVERSE);
         intakeArmleft.setDirection(Servo.Direction.REVERSE);
-        intakeArmRight.setDirection(Servo.Direction.REVERSE);
-        intakeWrist.setDirection(Servo.Direction.REVERSE);
-        intakeClaw.setDirection(Servo.Direction.REVERSE);
+        intakeArmRight.setDirection(Servo.Direction.FORWARD);
+        intakeWrist.setDirection(Servo.Direction.FORWARD);
+        intakeClaw.setDirection(Servo.Direction.FORWARD);
 
-        setIntakeState(IntakeStates.INTAKEOUT);
+        intakeStates = IntakeStates.TRANSFER;
+
+        setIntakeState(IntakeStates.TRANSFER);
 
         this.telemetry = telemetry;
     }
@@ -91,7 +93,7 @@ public class Intake extends SubsystemBase {
                 linkage2.setPosition(IntakeConstants.linkageIn);
                 intakeArmleft.setPosition(IntakeConstants.intakeArmtransfer);
                 intakeArmRight.setPosition(IntakeConstants.intakeArmtransfer);
-                intakeWrist.setPosition(IntakeConstants.deg90);
+                intakeWrist.setPosition(IntakeConstants.deg180);
                 setClawOpen(true);
                 break;
             case HOVEROUT:
@@ -107,7 +109,7 @@ public class Intake extends SubsystemBase {
                 linkage2.setPosition(IntakeConstants.linkageOut);
                 intakeArmleft.setPosition(IntakeConstants.pickUp);
                 intakeArmRight.setPosition(IntakeConstants.pickUp);
-                intakeWrist.setPosition(IntakeConstants.deg90);
+                intakeWrist.setPosition(IntakeConstants.deg180);
                 setClawOpen(true);
                 break;
         }
@@ -115,7 +117,7 @@ public class Intake extends SubsystemBase {
 
     @Override
     public void periodic (){
-        telemetry.addData("Intake State ", getIntakeStates());
+        telemetry.addData("Intake State ", getIntakeStates().toString());
         telemetry.addData("claw ", isClawOpen());
 
     }

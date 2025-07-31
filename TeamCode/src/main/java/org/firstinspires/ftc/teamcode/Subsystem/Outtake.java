@@ -38,8 +38,8 @@ public class Outtake extends SubsystemBase {
         outtakeRightArmPivot.setDirection(Servo.Direction.FORWARD);
         outtakeWrist.setDirection(Servo.Direction.FORWARD);
         outtakeClaw.setDirection(Servo.Direction.REVERSE);
-
-        setOuttakeStates(OuttakeStates.TRANSFER);
+        outtakeStates = OuttakeStates.TRANSFER;
+        setOuttakeState(OuttakeStates.TRANSFER);
 
         this.telemetry = telemetry;
     }
@@ -58,7 +58,7 @@ public class Outtake extends SubsystemBase {
     }
     public boolean isClawOpen (){return outtakeClawOpen;}
 
-    public void setOuttakeStates(OuttakeStates outtakeStates){
+    public void setOuttakeState(OuttakeStates outtakeStates){
         switch (outtakeStates){
             case TRANSFER:
                 outtakeLeftArmPivot.setPosition(OuttakeConstants.pivotArmTransfer);
@@ -91,7 +91,7 @@ public class Outtake extends SubsystemBase {
 
     @Override
     public void periodic (){
-        telemetry.addData("Outtake State ", getOuttakeStates());
+        telemetry.addData("Outtake State ", getOuttakeStates().toString());
         telemetry.addData("Outtake Claw ", isClawOpen());
 
     }

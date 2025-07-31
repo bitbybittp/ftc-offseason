@@ -12,9 +12,7 @@ public class PrepareIntake extends SequentialCommandGroup {
      public PrepareIntake(Elevator elevator, Intake intake){
          setName("ReadySample");
          addCommands(
-                 new ElevatorController(elevator, Elevator.ElevatorStates.CLEARENCE),
-                 new WaitCommand(100),
-                 new IntakeController(intake, Intake.IntakeStates.HOVEROUT, true)
+                 new ElevatorController(elevator, Elevator.ElevatorStates.CLEARENCE).alongWith(new IntakeController(intake, Intake.IntakeStates.HOVEROUT, true))
          );
      }
 
