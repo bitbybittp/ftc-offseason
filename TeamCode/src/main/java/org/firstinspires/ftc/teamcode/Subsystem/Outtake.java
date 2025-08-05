@@ -65,25 +65,21 @@ public class Outtake extends SubsystemBase {
                 outtakeLeftArmPivot.setPosition(OuttakeConstants.pivotArmTransfer);
                 outtakeRightArmPivot.setPosition(OuttakeConstants.pivotArmTransfer);
                 outtakeWrist.setPosition(OuttakeConstants.wristTransfer);
-                //setClawOpen(true);
                 break;
             case SPECIMENSCORE:
                 outtakeRightArmPivot.setPosition(OuttakeConstants.pivotArmSpecimenScore);
                 outtakeLeftArmPivot.setPosition(OuttakeConstants.pivotArmSpecimenScore);
                 outtakeWrist.setPosition(OuttakeConstants.wristSpecimenScore);
-                //setClawOpen(true);
                 break;
             case SAMPLESCORE:
                 outtakeLeftArmPivot.setPosition(OuttakeConstants.pivotArmSampleSCore);
                 outtakeRightArmPivot.setPosition(OuttakeConstants.pivotArmSampleSCore);
                 outtakeWrist.setPosition(OuttakeConstants.wristSampleScore);
-                //setClawOpen(true);
                 break;
             case SPECIMENPICKUP:
                 outtakeLeftArmPivot.setPosition(OuttakeConstants.pivotArmSpecimenPickUp);
                 outtakeRightArmPivot.setPosition(OuttakeConstants.pivotArmSpecimenPickUp);
                 outtakeWrist.setPosition(OuttakeConstants.wristSpecimenPickUp);
-                //setClawOpen(true);
                 break;
 
         }

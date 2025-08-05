@@ -80,7 +80,6 @@ public class Intake extends SubsystemBase {
                 intakeArmleft.setPosition(IntakeConstants.hover);
                 intakeArmRight.setPosition(IntakeConstants.hover);
                 intakeWrist.setPosition(IntakeConstants.deg180);
-                //setClawOpen(true);
                 break;
             case INTAKEIN:
                 linkage.setPosition(IntakeConstants.linkageIn);
@@ -88,7 +87,6 @@ public class Intake extends SubsystemBase {
                 intakeArmleft.setPosition(IntakeConstants.pickUp);
                 intakeArmRight.setPosition(IntakeConstants.pickUp);
                 intakeWrist.setPosition(IntakeConstants.deg180);
-                //setClawOpen(true);
                 break;
             case TRANSFER:
                 linkage.setPosition(IntakeConstants.linkageIn);
@@ -96,7 +94,6 @@ public class Intake extends SubsystemBase {
                 intakeArmleft.setPosition(IntakeConstants.intakeArmtransfer);
                 intakeArmRight.setPosition(IntakeConstants.intakeArmtransfer);
                 intakeWrist.setPosition(IntakeConstants.deg180);
-                //setClawOpen(true);
                 break;
             case HOVEROUT:
                 linkage.setPosition(IntakeConstants.linkageOut);
@@ -104,7 +101,6 @@ public class Intake extends SubsystemBase {
                 intakeArmleft.setPosition(IntakeConstants.hover);
                 intakeArmRight.setPosition(IntakeConstants.hover);
                 intakeWrist.setPosition(IntakeConstants.deg180);
-                //setClawOpen(true);
                 break;
             case INTAKEOUT:
                 linkage.setPosition(IntakeConstants.linkageOut);
@@ -112,7 +108,6 @@ public class Intake extends SubsystemBase {
                 intakeArmleft.setPosition(IntakeConstants.pickUp);
                 intakeArmRight.setPosition(IntakeConstants.pickUp);
                 intakeWrist.setPosition(IntakeConstants.deg180);
-                //setClawOpen(true);
                 break;
         }
     }
