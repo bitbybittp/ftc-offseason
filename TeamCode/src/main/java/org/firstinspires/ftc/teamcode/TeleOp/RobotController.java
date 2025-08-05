@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.command.CommandScheduler;
-import com.seattlesolvers.solverslib.command.button.Button;
 import com.seattlesolvers.solverslib.command.button.GamepadButton;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
+import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
 import org.firstinspires.ftc.teamcode.Subsystem.Drivetrain;
 import org.firstinspires.ftc.teamcode.Subsystem.Elevator;
@@ -12,10 +13,8 @@ import org.firstinspires.ftc.teamcode.Subsystem.Intake;
 import org.firstinspires.ftc.teamcode.Subsystem.Outtake;
 import org.firstinspires.ftc.teamcode.commands.DrivetrainController;
 import org.firstinspires.ftc.teamcode.commands.group.CheckRobot;
-import org.firstinspires.ftc.teamcode.commands.group.PickUpSample;
+import org.firstinspires.ftc.teamcode.commands.group.RetractRobot;
 import org.firstinspires.ftc.teamcode.utilities.ButtonBind;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
 @TeleOp(name = "TestOp")
 public class RobotController extends CommandOpMode {
@@ -25,6 +24,8 @@ public class RobotController extends CommandOpMode {
     private Elevator elevator;
     private GamepadEx g1;
     private ButtonBind buttonBind;
+    private GamepadButton checkRobot;
+    private GamepadButton retractRobot;
 
     long lastTime = 0;
 
@@ -54,11 +55,11 @@ public class RobotController extends CommandOpMode {
         lastTime = currentTime;
         telemetry.addData("Loop Time (ms): ", loopTimeMs);
 
-        CommandScheduler.getInstance().onCommandInitialize(command->{
-            telemetry.addData("Command Works: ", command.getName());
-        });
+        //CommandScheduler.getInstance().onCommandInitialize(command->{
+            //telemetry.addData("Command Works: ", command.getName());
+       // });
 
-        telemetry.update();
+       // telemetry.update();
         updateTelemetry(telemetry);
     }
 }

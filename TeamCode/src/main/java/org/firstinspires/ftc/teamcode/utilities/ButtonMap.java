@@ -11,6 +11,7 @@ public class ButtonMap {
     public GamepadButton pickSample;
     public GamepadButton prepareIntake;
     public GamepadButton retractAndTransfer;
+    public GamepadButton checkRobot;
 
     public ButtonMap(GamepadEx g1){
         scoreSample = new GamepadButton(g1, GamepadKeys.Button.LEFT_BUMPER);
@@ -18,5 +19,7 @@ public class ButtonMap {
         pickSample = new GamepadButton(g1,GamepadKeys.Button.TRIANGLE);
         prepareIntake = new GamepadButton(g1, GamepadKeys.Button.CIRCLE);
         retractAndTransfer = new GamepadButton(g1,GamepadKeys.Button.CROSS);
+        checkRobot = new GamepadButton(g1, GamepadKeys.Button.DPAD_UP);
+
     }
 }

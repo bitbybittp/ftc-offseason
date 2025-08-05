@@ -12,7 +12,7 @@ public class OuttakeController extends CommandBase {
     public OuttakeController(Outtake outtake, Outtake.OuttakeStates outtakeStates, boolean clawOpen){
         this.outtake = outtake;
         this.outtakeStates = outtakeStates;
-        this.clawOpen = outtake.outtakeClawOpen;
+        this.clawOpen =clawOpen;
 
         addRequirements(outtake);
 

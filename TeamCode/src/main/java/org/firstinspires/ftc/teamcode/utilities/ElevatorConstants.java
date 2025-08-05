@@ -11,8 +11,8 @@ public class ElevatorConstants {
     public static double sampleScoreHigh = 3300;
     public static double sampleScoreLow = 1000;
     public static double specimenScore = 2290;
-    public static double p = 0.023;
+    public static double p = 0.025;
     public static double i = 0.0;
-    public static double d = 0.0003;
+    public static double d = 0.0001;
     public static double f = 0.0;
 }

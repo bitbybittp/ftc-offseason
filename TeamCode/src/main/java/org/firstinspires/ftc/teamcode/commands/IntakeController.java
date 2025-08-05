@@ -10,16 +10,16 @@ public class IntakeController extends CommandBase {
     private Intake.IntakeStates intakeStates;
     private boolean clawOpen;
 
-    public IntakeController (Intake intake, Intake.IntakeStates intakeStates,boolean clawOpen){
+    public IntakeController (Intake intake, Intake.IntakeStates intakeStates, boolean clawOpen){
         this.intake = intake;
         this.intakeStates = intakeStates;
-        this.clawOpen = intake.clawOpen;
+        this.clawOpen = clawOpen;
         addRequirements(intake);
     }
     @Override
     public void initialize(){
         intake.setIntakeState(intakeStates);
-        intake.setClawOpen(clawOpen);
+        //intake.setClawOpen(clawOpen2);
     }
 
     //public boolean isFinished(){

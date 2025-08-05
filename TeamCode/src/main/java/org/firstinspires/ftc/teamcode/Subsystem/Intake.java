@@ -46,6 +46,8 @@ public class Intake extends SubsystemBase {
 
         setIntakeState(IntakeStates.TRANSFER);
 
+        setClawOpen(true);
+
         this.telemetry = telemetry;
     }
 
@@ -66,7 +68,7 @@ public class Intake extends SubsystemBase {
         }
         this.clawOpen = open;
     }
-    public boolean isClawOpen(){
+    public boolean clawOpen(){
         return clawOpen;
     }
 
@@ -78,7 +80,7 @@ public class Intake extends SubsystemBase {
                 intakeArmleft.setPosition(IntakeConstants.hover);
                 intakeArmRight.setPosition(IntakeConstants.hover);
                 intakeWrist.setPosition(IntakeConstants.deg180);
-                setClawOpen(true);
+                //setClawOpen(true);
                 break;
             case INTAKEIN:
                 linkage.setPosition(IntakeConstants.linkageIn);
@@ -86,7 +88,7 @@ public class Intake extends SubsystemBase {
                 intakeArmleft.setPosition(IntakeConstants.pickUp);
                 intakeArmRight.setPosition(IntakeConstants.pickUp);
                 intakeWrist.setPosition(IntakeConstants.deg180);
-                setClawOpen(true);
+                //setClawOpen(true);
                 break;
             case TRANSFER:
                 linkage.setPosition(IntakeConstants.linkageIn);
@@ -94,7 +96,7 @@ public class Intake extends SubsystemBase {
                 intakeArmleft.setPosition(IntakeConstants.intakeArmtransfer);
                 intakeArmRight.setPosition(IntakeConstants.intakeArmtransfer);
                 intakeWrist.setPosition(IntakeConstants.deg180);
-                setClawOpen(true);
+                //setClawOpen(true);
                 break;
             case HOVEROUT:
                 linkage.setPosition(IntakeConstants.linkageOut);
@@ -102,7 +104,7 @@ public class Intake extends SubsystemBase {
                 intakeArmleft.setPosition(IntakeConstants.hover);
                 intakeArmRight.setPosition(IntakeConstants.hover);
                 intakeWrist.setPosition(IntakeConstants.deg180);
-                setClawOpen(true);
+                //setClawOpen(true);
                 break;
             case INTAKEOUT:
                 linkage.setPosition(IntakeConstants.linkageOut);
@@ -110,7 +112,7 @@ public class Intake extends SubsystemBase {
                 intakeArmleft.setPosition(IntakeConstants.pickUp);
                 intakeArmRight.setPosition(IntakeConstants.pickUp);
                 intakeWrist.setPosition(IntakeConstants.deg180);
-                setClawOpen(true);
+                //setClawOpen(true);
                 break;
         }
     }
@@ -118,7 +120,7 @@ public class Intake extends SubsystemBase {
     @Override
     public void periodic (){
         telemetry.addData("Intake State ", getIntakeStates().toString());
-        telemetry.addData("claw ", isClawOpen());
+        telemetry.addData("claw ", clawOpen());
 
     }
 

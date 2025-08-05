@@ -39,7 +39,7 @@ public class Elevator extends SubsystemBase {
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         liftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         liftEncoder.reset();
-        elevatorController.setTolerance(25);
+        elevatorController.setTolerance(20);
         elevatorStates = ElevatorStates.TRANSFER;
         target=0;
 
