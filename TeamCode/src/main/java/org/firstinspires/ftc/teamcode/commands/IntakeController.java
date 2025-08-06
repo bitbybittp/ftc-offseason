@@ -19,10 +19,10 @@ public class IntakeController extends CommandBase {
     @Override
     public void initialize(){
         intake.setIntakeState(intakeStates);
-        //intake.setClawOpen(clawOpen2);
+        intake.setClawOpen(clawOpen);
     }
 
-    //public boolean isFinished(){
-        //return true;
-   // }
+    public boolean isFinished(){
+        return true;
+    }
 }

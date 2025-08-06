@@ -13,9 +13,10 @@ public class PickUpSample extends SequentialCommandGroup {
     public PickUpSample (Intake intake, Elevator elevator){
         setName("PickSample");
         addCommands(
-                new IntakeController(intake, Intake.IntakeStates.INTAKEOUT, false),
-                new WaitCommand(100),
+                new IntakeController(intake, Intake.IntakeStates.INTAKEOUT, true),
+                new WaitCommand(800),
                 new InstantCommand(()-> intake.setClawOpen(false)),
+                //new WaitCommand(700),
                 new IntakeController(intake, Intake.IntakeStates.HOVEROUT, false)
         );
     }
