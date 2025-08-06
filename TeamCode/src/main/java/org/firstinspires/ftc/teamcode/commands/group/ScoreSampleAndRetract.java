@@ -17,10 +17,12 @@ public class ScoreSampleAndRetract extends SequentialCommandGroup {
         setName("ScoreSampleAndRetract");
         addCommands(
                 new ElevatorController(elevator, Elevator.ElevatorStates.SAMPLESCOREHIGH),
-                new WaitCommand(3000),
+                new WaitCommand(500),
                 new OuttakeController(outtake, Outtake.OuttakeStates.SAMPLESCORE,false),
-                new WaitCommand(300).andThen(new InstantCommand(()->outtake.setClawOpen(true))),
-                new WaitCommand(300).andThen(new OuttakeController(outtake, Outtake.OuttakeStates.TRANSFER,true)),
+                new WaitCommand(700),
+                new InstantCommand(()->outtake.setClawOpen(true)),
+                new WaitCommand(500),
+                new OuttakeController(outtake, Outtake.OuttakeStates.TRANSFER,true),
                 new ElevatorController(elevator, Elevator.ElevatorStates.TRANSFER)
         );
     }

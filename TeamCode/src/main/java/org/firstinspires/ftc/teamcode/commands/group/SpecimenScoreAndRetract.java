@@ -15,8 +15,11 @@ public class SpecimenScoreAndRetract extends SequentialCommandGroup {
         addCommands(
                 new OuttakeController(outtake, Outtake.OuttakeStates.SPECIMENSCORE,false),
                 new ElevatorController(elevator, Elevator.ElevatorStates.SPECIMENSCORE),
-                new InstantCommand(()->outtake.setClawOpen(false)).alongWith(new WaitCommand(300)),
-                new ElevatorController(elevator, Elevator.ElevatorStates.TRANSFER).alongWith(new InstantCommand(()->outtake.setClawOpen(true)))
+                new WaitCommand(400),
+                new InstantCommand(()->outtake.setClawOpen(false)),
+                new WaitCommand(300),
+                new ElevatorController(elevator, Elevator.ElevatorStates.TRANSFER),
+                new InstantCommand(()->outtake.setClawOpen(true))
         );
     }
 }

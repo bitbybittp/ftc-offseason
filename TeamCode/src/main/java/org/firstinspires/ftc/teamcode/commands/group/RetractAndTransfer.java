@@ -18,11 +18,10 @@ public class RetractAndTransfer extends SequentialCommandGroup {
                 new IntakeController(intake, Intake.IntakeStates.TRANSFER, false),
                 new WaitCommand(1000),
                 new ElevatorController(elevator, Elevator.ElevatorStates.TRANSFER),
+                new OuttakeController(outtake, Outtake.OuttakeStates.TRANSFER, true),
                 new InstantCommand(()-> intake.setClawOpen(true)),
-                new InstantCommand(()-> outtake.setClawOpen(true)),
                 new WaitCommand(500),
-                new OuttakeController(outtake, Outtake.OuttakeStates.TRANSFER, false),
-                new InstantCommand(()-> outtake.setClawOpen(false))
+                new InstantCommand(()->outtake.setClawOpen(false))
         );
     }
 }

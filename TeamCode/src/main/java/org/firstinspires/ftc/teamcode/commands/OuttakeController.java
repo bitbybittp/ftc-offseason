@@ -23,7 +23,7 @@ public class OuttakeController extends CommandBase {
         outtake.setClawOpen(clawOpen);
     }
 
-    //public boolean isFinished(){
-        //return true;
-    //}
+    public boolean isFinished(){
+        return true;
+    }
 }

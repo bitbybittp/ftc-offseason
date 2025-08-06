@@ -24,7 +24,7 @@ public class Outtake extends SubsystemBase {
     private SolversServo outtakeClaw;
 
     public OuttakeStates outtakeStates;
-    public boolean outtakeClawOpen;
+    public boolean clawOpen;
 
     private Telemetry telemetry;
 
@@ -37,10 +37,11 @@ public class Outtake extends SubsystemBase {
         outtakeLeftArmPivot.setDirection(Servo.Direction.REVERSE);
         outtakeRightArmPivot.setDirection(Servo.Direction.FORWARD);
         outtakeWrist.setDirection(Servo.Direction.FORWARD);
-        outtakeClaw.setDirection(Servo.Direction.REVERSE);
+        outtakeClaw.setDirection(Servo.Direction.FORWARD);
         outtakeStates = OuttakeStates.TRANSFER;
         setOuttakeState(OuttakeStates.TRANSFER);
-        outtakeClawOpen = true;
+        clawOpen = true;
+        setClawOpen(true);
 
         this.telemetry = telemetry;
     }
@@ -55,9 +56,9 @@ public class Outtake extends SubsystemBase {
         } else {
             outtakeClaw.setPosition(0.00);
         }
-        this.outtakeClawOpen = open;
+        this.clawOpen = open;
     }
-    public boolean isClawOpen (){return outtakeClawOpen;}
+    public boolean isClawOpen (){return clawOpen;}
 
     public void setOuttakeState(OuttakeStates outtakeStates){
         switch (outtakeStates){

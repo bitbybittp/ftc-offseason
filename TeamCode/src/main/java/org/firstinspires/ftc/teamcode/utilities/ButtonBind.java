@@ -24,6 +24,10 @@ public class ButtonBind{
         buttonMap.scoreSample.whenPressed(new ScoreSampleAndRetract(outtake, elevator));
         buttonMap.scoreSpecimen.whenPressed(new SpecimenScoreAndRetract(outtake, elevator));
         buttonMap.checkRobot.whenPressed(new CheckRobot(elevator));
+        buttonMap.toggleClaw.toggleWhenActive(
+                ()-> outtake.setClawOpen(true),
+                ()-> outtake.setClawOpen(false)
+        );
 
     }
 

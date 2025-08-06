@@ -81,7 +81,7 @@ public class Elevator extends SubsystemBase {
         elevatorController.setSetPoint(this.target);
          power = elevatorController.calculate(getElevatorPosition(), target);
 
-        if (target <= 0){
+        if (target ==0 && getElevatorPosition()<=0){
             liftMotor.setPower(0);
         } else {
             liftMotor.setPower(power);

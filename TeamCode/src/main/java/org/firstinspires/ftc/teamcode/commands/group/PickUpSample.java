@@ -14,7 +14,7 @@ public class PickUpSample extends SequentialCommandGroup {
         setName("PickSample");
         addCommands(
                 new IntakeController(intake, Intake.IntakeStates.INTAKEOUT, true),
-                new WaitCommand(800),
+                new WaitCommand(500),
                 new InstantCommand(()-> intake.setClawOpen(false)),
                 //new WaitCommand(700),
                 new IntakeController(intake, Intake.IntakeStates.HOVEROUT, false)

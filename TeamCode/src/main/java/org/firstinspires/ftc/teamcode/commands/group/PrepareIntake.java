@@ -16,7 +16,7 @@ public class PrepareIntake extends SequentialCommandGroup {
          addCommands(
                  new ElevatorController(elevator, Elevator.ElevatorStates.CLEARENCE),
                  new IntakeController(intake, Intake.IntakeStates.HOVEROUT,true),
-                 new WaitCommand(300),
+                 new WaitCommand(400),
                  new ElevatorController(elevator, Elevator.ElevatorStates.TRANSFER)
          );
      }
