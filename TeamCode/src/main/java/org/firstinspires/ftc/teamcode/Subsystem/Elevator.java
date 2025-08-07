@@ -19,7 +19,8 @@ public class Elevator extends SubsystemBase {
     CLEARENCE,
     SPECIMENSCORE,
     SAMPLESCORELOW,
-    SAMPLESCOREHIGH
+    SAMPLESCOREHIGH,
+    SPECIMENREADY
     }
     public SolversMotor liftMotor;
     public Motor.Encoder liftEncoder;
@@ -39,7 +40,7 @@ public class Elevator extends SubsystemBase {
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         liftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         liftEncoder.reset();
-        elevatorController.setTolerance(20);
+        elevatorController.setTolerance(28);
         elevatorStates = ElevatorStates.TRANSFER;
         target=0;
 
@@ -71,6 +72,9 @@ public class Elevator extends SubsystemBase {
                 break;
             case SAMPLESCOREHIGH:
                 target = ElevatorConstants.sampleScoreHigh;
+                break;
+            case SPECIMENREADY:
+                target = ElevatorConstants.specimenReady;
                 break;
         }
 

@@ -10,13 +10,12 @@ import org.firstinspires.ftc.teamcode.commands.IntakeController;
 
 public class PickUpSample extends SequentialCommandGroup {
 
-    public PickUpSample (Intake intake, Elevator elevator){
+    public PickUpSample (Intake intake){
         setName("PickSample");
         addCommands(
                 new IntakeController(intake, Intake.IntakeStates.INTAKEOUT, true),
-                new WaitCommand(500),
+                new WaitCommand(400),
                 new InstantCommand(()-> intake.setClawOpen(false)),
-                //new WaitCommand(700),
                 new IntakeController(intake, Intake.IntakeStates.HOVEROUT, false)
         );
     }

@@ -62,7 +62,7 @@ public class Intake extends SubsystemBase {
     }
     public void setClawOpen(boolean open){
         if(open){
-            intakeClaw.setPosition(0.25);
+            intakeClaw.setPosition(0.2);
         } else {
             intakeClaw.setPosition(0.0);
         }

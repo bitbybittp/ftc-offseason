@@ -13,13 +13,10 @@ public class SpecimenScoreAndRetract extends SequentialCommandGroup {
     public SpecimenScoreAndRetract(Outtake outtake, Elevator elevator){
         setName("SpecimenScoreAndRetract");
         addCommands(
-                new OuttakeController(outtake, Outtake.OuttakeStates.SPECIMENSCORE,false),
                 new ElevatorController(elevator, Elevator.ElevatorStates.SPECIMENSCORE),
-                new WaitCommand(400),
-                new InstantCommand(()->outtake.setClawOpen(false)),
+                new ElevatorController(elevator, Elevator.ElevatorStates.TRANSFER).alongWith(new InstantCommand(()-> outtake.setClawOpen(true))),
                 new WaitCommand(300),
-                new ElevatorController(elevator, Elevator.ElevatorStates.TRANSFER),
-                new InstantCommand(()->outtake.setClawOpen(true))
+                new OuttakeController(outtake, Outtake.OuttakeStates.TRANSFER, true)
         );
     }
 }

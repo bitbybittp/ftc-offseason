@@ -68,7 +68,7 @@ public class Drivetrain extends SubsystemBase {
         telemetry.addData("X Position ", follower.getPose().getX());
         telemetry.addData("Y Position ", follower.getPose().getY());
         telemetry.addData("Heading ", follower.getPose().getHeading());
-        //follower.update();
+        follower.update();
 
     }
 }

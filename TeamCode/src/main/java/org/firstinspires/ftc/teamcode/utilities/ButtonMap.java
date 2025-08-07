@@ -13,6 +13,7 @@ public class ButtonMap {
     public GamepadButton retractAndTransfer;
     public GamepadButton checkRobot;
     public GamepadButton toggleClaw;
+    public GamepadButton prepareSpecimen;
 
     public ButtonMap(GamepadEx g1){
         scoreSample = new GamepadButton(g1, GamepadKeys.Button.LEFT_BUMPER);
@@ -22,5 +23,6 @@ public class ButtonMap {
         retractAndTransfer = new GamepadButton(g1,GamepadKeys.Button.CROSS);
         checkRobot = new GamepadButton(g1, GamepadKeys.Button.DPAD_UP);
         toggleClaw = new GamepadButton(g1, GamepadKeys.Button.DPAD_DOWN);
+        prepareSpecimen = new GamepadButton(g1, GamepadKeys.Button.DPAD_RIGHT);
     }
 }
